@@ -1,5 +1,5 @@
 const fs = require('fs');
-eval(fs.readFileSync('./isTuesday.js', 'utf8'));
+eval(fs.readFileSync('./site/isTuesday.js', 'utf8'));
 
 const results = [];
 
