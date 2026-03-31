@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>isTuesday — Tests</title>
+  <style>
+    body { font-family: monospace; padding: 2rem; background: #1e1e1e; color: #ccc; }
+    h1 { color: #fff; }
+    .pass { color: #4caf50; }
+    .fail { color: #f44336; }
+    .summary { margin-top: 1.5rem; font-size: 1.1rem; font-weight: bold; }
+    li { margin: 0.3rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Test Results</h1>
+  <ul id="results"></ul>
+  <div class="summary" id="summary"></div>
+
+  <script src="isTuesday.js"></script>
+  <script>
+    const results = [];
+
+    function test(description, fn) {
+      try {
+        fn();
+        results.push({ ok: true, description });
+      } catch (e) {
+        results.push({ ok: false, description, error: e.message });
+      }
+    }
+
+    function assert(condition, message) {
+      if (!condition) throw new Error(message || 'assertion failed');
+    }
+
+    // ── Tests ──────────────────────────────────────────────────────────────────
+
+    // Tuesday = day index 2
+    test('returns true for a known Tuesday', () => {
+      assert(isTuesday(new Date('2026-03-31')) === true, 'expected true for 2026-03-31 (Tuesday)');
+    });
+
+    test('returns false for a Wednesday', () => {
+      assert(isTuesday(new Date('2026-04-01')) === false, 'expected false for 2026-04-01 (Wednesday)');
+    });
+
+    test('returns false for a Monday', () => {
+      assert(isTuesday(new Date('2026-03-30')) === false, 'expected false for 2026-03-30 (Monday)');
+    });
+
+    test('returns true for another Tuesday', () => {
+      assert(isTuesday(new Date('2024-01-02')) === true, 'expected true for 2024-01-02 (Tuesday)');
+    });
+
+    test('returns false for a Sunday', () => {
+      assert(isTuesday(new Date('2026-03-29')) === false, 'expected false for 2026-03-29 (Sunday)');
+    });
+
+    // ── Render results ─────────────────────────────────────────────────────────
+
+    const ul = document.getElementById('results');
+    let passed = 0;
+    for (const r of results) {
+      const li = document.createElement('li');
+      if (r.ok) {
+        li.className = 'pass';
+        li.textContent = `✓ ${r.description}`;
+        passed++;
+      } else {
+        li.className = 'fail';
+        li.textContent = `✗ ${r.description} — ${r.error}`;
+      }
+      ul.appendChild(li);
+    }
+
+    const summary = document.getElementById('summary');
+    const total = results.length;
+    const failed = total - passed;
+    summary.className = failed > 0 ? 'summary fail' : 'summary pass';
+    summary.textContent = `${passed}/${total} passed${failed > 0 ? `, ${failed} failed` : ''}`;
+  </script>
+</body>
+</html>

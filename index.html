@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Is it Tuesday?</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: monospace;
+      font-size: 6rem;
+      font-weight: bold;
+      color: #fff;
+      background: var(--bg);
+      transition: background 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <script src="isTuesday.js"></script>
+  <script>
+    const today = isTuesday(new Date());
+    document.body.style.setProperty('--bg', today ? '#2e7d32' : '#c62828');
+    document.body.textContent = today ? 'yes' : 'no';
+  </script>
+</body>
+</html>
