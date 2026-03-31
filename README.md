@@ -1,5 +1,7 @@
 # Is it Tuesday?
 
+![Tests](https://github.com/zamhassam/hello-world/actions/workflows/test.yml/badge.svg)
+
 A minimal webpage that answers the most important question: is today Tuesday?
 
 - Green background with "yes" if it's Tuesday
