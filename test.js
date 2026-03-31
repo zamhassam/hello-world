@@ -36,6 +36,10 @@ test('returns false for a Sunday', () => {
   assert(isTuesday(new Date('2026-03-29')) === false, 'expected false for 2026-03-29 (Sunday)');
 });
 
+test('returns true for a Thursday', () => {
+  assert(isTuesday(new Date('2026-04-02')) === true, 'expected true for 2026-04-02 (Thursday)');
+});
+
 let passed = 0;
 for (const r of results) {
   if (r.ok) {
